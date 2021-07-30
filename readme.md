@@ -10,8 +10,9 @@ It is not sold, authorized, or associated with any other company or product.
 To contact the author or for more information, please visit [www.techministry.blog](http://www.techministry.blog).
 
 ## Soldering 
-The NeoPixel-LEDs need to be soldered (or connected via cables) to the ESP32-board for them to light up. GND must connect to GND on the ESP32 board, +5V to +5V or VCC and DIN to the LED_PIN defined in the code (5 by default). 
-[]: # (Insert an image of an example pinout and connections)
+The NeoPixel-LEDs need to be soldered (or connected via cables) to the ESP32-board for them to light up. GND must connect to GND on the ESP32 board, +5V to +5V or VCC and DIN to the LED_PIN defined in the code (5 by default).
+
+<!-- (Insert an image of an example pinout and connections) -->
 
 ## Installing Sketch and Libraries
 1. Follow the tutorial for your specific ESP32-borad to download, install, and configure the Arduino IDE program. This is necessary to compile the code for your device.
