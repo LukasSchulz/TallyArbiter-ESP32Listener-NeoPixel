@@ -9,6 +9,9 @@ It is not sold, authorized, or associated with any other company or product.
 
 To contact the author or for more information, please visit [www.techministry.blog](http://www.techministry.blog).
 
+## Motivation
+In Germany, where I live, the M5Stick-C is hard to get, and also a lot more expensive to get than in the USA. But it is still possible to get ESP32-boards quite cheaply, combined with some NeoPixel-LEDs they make for a very bright alternative to the M5Stick-C. So I edited the code, so that it would work with the NeoPixel-Strip.
+
 ## Soldering 
 The NeoPixel-LEDs need to be soldered (or connected via cables) to the ESP32-board for them to light up. GND must connect to GND on the ESP32 board, +5V to +5V or VCC and DIN to the LED_PIN defined in the code (5 by default).
 
@@ -34,13 +37,29 @@ These will have to be included with the sketch file in order for it to compile p
 	const char * tallyarbiter_host = "192.168.1.100";
 	const int tallyarbiter_port = 4455;
 	```
-1. Save the file.
-1. Connect your ESP32 device to the computer via the provided USB-C or micro-USB cable.
-1. If not already on, power the device on by holding down the power button (located on the bottom left-hand side) for a couple seconds.
-1. Go to Tools > Board > ESP32 Arduino > and choose the right ESP32 based on the board you have. (There are many variants, [with](https://www.dfrobot.com/product-1590.html) or [without](https://www.ebay.de/itm/234033021888) a lipo-charging-controller and many other differences) If it's not listed, you may need to install it through the Boards Manager.
-1. Go to Tools > Upload Speed > and choose `750000` (one less from the maximum speed).
-1. Go to Tools > Port > and choose the serial port that represents your device.
-1. Go to Sketch > and choose `Upload`. The code will compile and upload to the device.
+1. Modify the LED-Pin and LED-Count to reflect your setup (and change the LED-Brightness if you want to):
+	```c++
+	#define LED_PIN     5
+	#define BRIGHTNESS 50 // Set BRIGHTNESS to about 1/5 (max = 255)
+	#define LED_COUNT  2
+	// Declare our NeoPixel strip object:
+	Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_RGB + NEO_KHZ800);
+	// Argument 1 = Number of pixels in NeoPixel strip
+	// Argument 2 = Arduino pin number (most are valid)
+	// Argument 3 = Pixel type flags, add together as needed:
+	//   NEO_KHZ800  800 KHz bitstream (most NeoPixel products w/WS2812 LEDs)
+	//   NEO_KHZ400  400 KHz (classic 'v1' (not v2) FLORA pixels, WS2811 drivers)
+	//   NEO_GRB     Pixels are wired for GRB bitstream (most NeoPixel products)
+	//   NEO_RGB     Pixels are wired for RGB bitstream (v1 FLORA pixels, not v2)
+	//   NEO_RGBW    Pixels are wired for RGBW bitstream (NeoPixel RGBW products)
+	```	
+3. Save the file.
+4. Connect your ESP32 device to the computer via the provided USB-C or micro-USB cable.
+5. If not already on, power the device on by holding down the power button (located on the bottom left-hand side) for a couple seconds.
+6. Go to Tools > Board > ESP32 Arduino > and choose the right ESP32 based on the board you have. (There are many variants, [with](https://www.dfrobot.com/product-1590.html) or [without](https://www.ebay.de/itm/234033021888) a lipo-charging-controller and many other differences) If it's not listed, you may need to install it through the Boards Manager.
+7. Go to Tools > Upload Speed > and choose `750000` (one less from the maximum speed).
+8. Go to Tools > Port > and choose the serial port that represents your device.
+9. Go to Sketch > and choose `Upload`. The code will compile and upload to the device.
 
 Once the code is successfully compiled and uploaded to the device. the M5Stick-C will boot up and automatically try to connect to your Tally Arbiter server. It will auto-assign itself to the first Device on the server, and you can reassign it through the Settings GUI of Tally Arbiter.
 
